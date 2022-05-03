@@ -1,8 +1,60 @@
-import sys
+class Faixa():
+    def __init__(self):
+        self.entrada = [j for j in input().replace(' ', '')]
 
-sys.stdin.reconfigure(errors='ignore')
-def entrada(self):
-    return [i for i in input()]
+    def eliminarRepetidos(self):
+        self.unico = set(self.entrada)
+        self.unico = [x for x in self.unico]
+        self.unico.sort()
+
+    def faixa(self):
+        size = len(self.unico)
+        aux = []
+        aux.append(self.unico[0])
+        for i in range(1, size):
+            if ord(self.unico[i]) - ord(self.unico[i - 1]) == 1:
+                if i == size - 1:
+                    aux.append(self.unico[i])
+                else:
+                    pass
+            else:
+                aux.append(self.unico[i-1])
+                aux.append(self.unico[i])
+                if i == size - 1:
+                    aux.append(self.unico[i])
+
+        self.unico = aux[:]
+
+    def saida(self):
+        if self.unico:
+            size = len(self.unico)
+            if size == 1:
+                print(f'{self.unico[0]}:{self.unico[0]}')
+            for i in range(1, size, 2):
+                if i < size - 1:
+                    print(f'{self.unico[i - 1]}:{self.unico[i]}', end=', ')
+                else:
+                    print(f'{self.unico[i - 1]}:{self.unico[i]}')
+        else:
+            print()
+
+try:
+    while True:
+        a = Faixa()
+        a.eliminarRepetidos()
+        if a.unico:
+            a.faixa()
+        a.saida()
+except EOFError:
+    pass
+
+
+#import sys
+# Usado para deixar explicito o codec necessário para decodificar a entrada.
+#sys.stdin.reconfigure(encoding='ISO-8859-1')
+
+def entrada():
+    return [j for j in sys.stdin.readline()]
 
 class Phone():
     def __init__(self):
@@ -10,61 +62,55 @@ class Phone():
         self.comprimento = len(self.original)
         self.timeA = entrada()
         self.timeB = entrada()
-        self.acertosA = 0
-        self.acertosB = 0
-        self.desempateA = 1000
-        self.desempateB = 1000
-        self.errouA = False
-        self.errouB = False
-
-
+        self.acertosA = []
+        self.acertosB = []
 
     def analisa(self):
-        try:
-            for i in range(self.comprimento):
-                if self.timeA[i] == self.original[i]:
-                    self.acertosA += 1
+        for k, v in enumerate(self.original):
+            try:
+                if self.timeA[k] == v:
+                    self.acertosA.append(True)
                 else:
-                    if not self.errouA:
-                        if self.timeB[i] == self.original[i]:
-                            self.errouA = True
-                            self.desempateA = i
+                    self.acertosA.append(False)
+            except:
+                self.acertosA.append(True)
+            try:
+                if self.timeB[k] == v:
+                    self.acertosB.append(True)
+                else:
+                    self.acertosB.append(False)
+            except:
+                self.acertosB.append(True)
 
-                if self.timeB[i] == self.original[i]:
-                    self.acertosB += 1
-                else:
-                    if not self.errouB:
-                        if self.timeA[i] == self.original[i]:
-                            self.errouB = True
-                            self.desempateB = i
-        except:
-            pass
+    def desempate(self):
+        for i in range(self.comprimento):
+            if self.acertosA[i] and not self.acertosB[i]:
+                return 'time 1'
+            elif not self.acertosA[i] and self.acertosB[i]:
+                return 'time 2'
+        return 'empate'
 
     def vitoria(self):
-        if self.acertosA > self.acertosB:
+        timea = sum(self.acertosA)
+        timeb = sum(self.acertosB)
+        if timea > timeb:
             return 'time 1'
-        elif self.acertosA < self.acertosB:
+        elif timea < timeb:
             return 'time 2'
         else:
-            if self.desempateA > self.desempateB:
-                return 'time 1'
-            elif self.desempateA < self.desempateB:
-                return 'time 2'
-            else:
-                return 'empate'
+            return self.desempate()
 
-c = int(input())
+'''c = sys.stdin.readline()
+c = int(c)
 
-for i in range(1, c + 1):
+for x in range(1, c + 1):
     a = Phone()
     a.analisa()
-    print(f'Instancia {i}')
-    print(a.vitoria())
-    if i < c:
-        print()
-
-
-
+    print(f'Instancia {x}')
+    vai = a.vitoria()
+    print(vai)
+    print()
+'''
 
 class Matring():
     def __init__(self):
