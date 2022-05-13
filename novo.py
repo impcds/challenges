@@ -1,3 +1,29 @@
+class Jetiqui():
+    def __init__(self):
+        self.first = input()
+        self.second = input()
+        self.enigma = input()
+
+
+    def vai(self):
+        first_letter = self.enigma.find('_')
+        second_letter = self.enigma.find('_', first_letter + 1)
+        first = self.first[first_letter]
+        first += self.first[second_letter]
+        second = self.second[first_letter]
+        second += self.second[second_letter]
+
+        if first[0] == second[1] or first[1] == second[0]:
+            return True
+        else:
+            return False
+
+    def __str__(self):
+        if self.vai():
+            return 'Y'
+        else:
+            return 'N'
+
 class Zoeiro():
     def __init__(self, x, z):
         self.trocas = [input() for i in range(x)]
