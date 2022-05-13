@@ -1,3 +1,195 @@
+class Jon():
+    def __init__(self):
+        self.string = input()
+        self.r = self.string[:self.string.find('+')]
+        self.l = self.string[self.string.find('+') + 1:self.string.find('=')]
+        self.j = self.string[self.string.find('=') + 1:]
+
+    def __str__(self):
+        return self.string
+
+    def encontraX(self):
+        if self.r.isnumeric() and self.l.isnumeric():
+            return int(self.r) + int(self.l)
+        elif self.r.isnumeric() and self.j.isnumeric():
+            return int(self.j) - int(self.r)
+        elif self.l.isnumeric() and self.j.isnumeric():
+            return int(self.j) - int(self.l)
+
+try:
+    while True:
+        obj = Jon()
+        print(obj.encontraX())
+except Exception as r:
+    pass
+
+
+class Evergreen():
+    def __init__(self):
+        self.first = input()
+        self.second = input()
+        self.first_name = ''
+        self.last_name = ''
+
+    def __str__(self):
+        return self.first_name
+
+    def conversor(self):
+        for i in range(0, len(self.first), 2):
+            self.first_name += self.first[i:i+2]
+            self.first_name += self.second[i:i+2]
+
+
+class Turing():
+    def __init__(self):
+        self.cifrada = input()
+        self.crib = input()
+        self.len_cifrada = len(self.cifrada)
+        self.len_crib = len(self.crib)
+        self.possibilidades = 0
+
+    def __str__(self):
+        return str(self.possibilidades)
+
+    def analisa(self):
+        inicio = 0
+        while inicio - 1 < self.len_cifrada - self.len_crib:
+            inicio += self.compara(inicio)
+
+    def compara(self, inicio):
+        aux = self.cifrada[inicio:inicio + self.len_crib]
+        for i in range(self.len_crib):
+            if self.crib[i] == aux[i]:
+                return 1
+        self.possibilidades += 1
+        return 1
+
+class TempPassword():
+    def __init__(self):
+        self.entrada = input()
+        self.password = ''
+
+    def __str__(self):
+        return self.password
+
+    def validador(self):
+        try:
+            if len(self.entrada) != 20 or self.entrada[:2] != 'RA':
+                self.password = 'INVALID DATA'
+            else:
+                self.password = self.entrada[2:].lstrip('0')
+        except:
+            self.password = 'INVALID DATA'
+
+'''c = int(input())
+for i in range(c):
+    obj = TempPassword()
+    obj.validador()
+    print(obj)
+'''
+
+class Gago():
+    def __init__(self):
+        self.frase = input().split()
+
+    def __str__(self):
+        return ' '.join(self.frase)
+
+    def arrumaGago(self):
+        for k, v in enumerate(self.frase):
+            try:
+                if v[0] == v[2] and v[1] == v[3]:
+                    self.frase[k] = self.frase[k][2:]
+            except:
+                pass
+
+'''try:
+    while True:
+        obj = Gago()
+        obj.arrumaGago()
+        print(obj)
+except EOFError:
+    pass
+'''
+
+class AlienAlphabet():
+    def __init__(self):
+        self.vogais = input()
+        self.txt = input()
+        self.count = 0
+
+    def __str__(self):
+        return str(self.count)
+
+    def contarVogais(self):
+        for i in self.vogais:
+            self.count += self.txt.count(i)
+
+'''try:
+    while True:
+        obj = AlienAlphabet()
+        obj.contarVogais()
+        print(obj)
+except:
+    pass
+'''
+class Tags():
+    def __init__(self):
+        self.old = input()
+        self.new = input()
+        self.doc = input()
+        self.lenTag = len(self.old)
+        self.docLower = self.doc.lower()
+        self.abreFecha = []
+        self.tags = []
+        self.tagsValidas = []
+        self.valido = True
+
+    def listarIndices(self):
+        self.lista_de_indices = []
+        for i in range(0, len(self.indices), 2):
+            self.lista_de_indices.extend([i for i in range(self.indices[i] + 1, self.indices[i + 1])])
+
+    def alterar(self):
+        if self.valido:
+            i = 0
+            while True:
+                i = self.doc.lower().find(self.old.lower(), i + 1)
+                self.encontraTags()
+                self.listarIndices()
+                if i != -1 and i in self.lista_de_indices:
+                    self.doc = self.doc[:i] + self.new + self.doc[i + self.lenTag:]
+                elif i == -1:
+                    break
+
+    def encontraTags(self):
+        self.indices = []
+        for k, v in enumerate(self.doc):
+            if v in '<':
+                self.abreFecha.append(v)
+                self.indices.append(k)
+            elif v in '>':
+                self.abreFecha.append(v)
+                self.indices.append(k)
+
+    def validacao(self):
+        for i in range(0, len(self.abreFecha), 2):
+            if self.abreFecha[i] not in '<' or self.abreFecha[i + 1] not in '>':
+                self.valido = False
+                break
+
+'''try:
+    while True:
+        obj = Tags()
+        obj.encontraTags()
+        obj.validacao()
+        obj.listarIndices()
+        obj.alterar()
+        print(obj.doc)
+except EOFError:
+    pass
+'''
+
 class Faixa():
     def __init__(self):
         self.entrada = [j for j in input().replace(' ', '')]
@@ -38,7 +230,7 @@ class Faixa():
         else:
             print()
 
-try:
+'''try:
     while True:
         a = Faixa()
         a.eliminarRepetidos()
@@ -47,7 +239,7 @@ try:
         a.saida()
 except EOFError:
     pass
-
+'''
 
 #import sys
 # Usado para deixar explicito o codec necessário para decodificar a entrada.
