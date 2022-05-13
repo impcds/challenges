@@ -1,3 +1,25 @@
+class Zoeiro():
+    def __init__(self, x, z):
+        self.trocas = [input() for i in range(x)]
+        self.sentencas = [input() for i in range(z)]
+
+    def decodifica(self):
+        for i in self.sentencas:
+            saida = ''
+            for l in i:
+                trocou = False
+                for t in self.trocas:
+                    if l in t[0]:
+                        saida += t[2]
+                        trocou = True
+                    elif l in t[2]:
+                        saida += t[0]
+                        trocou = True
+                if not trocou:
+                    saida += l
+            print(saida)
+
+
 class Hopper():
     def __init__(self):
         self.entrada = input().lower().split('-')
