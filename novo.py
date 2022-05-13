@@ -1,3 +1,24 @@
+class Hopper():
+    def __init__(self):
+        self.entrada = input().lower().split('-')
+        self.letras = [self.letras(i) for i in self.entrada]
+        self.meta = 'cobol'
+
+    def letras(self, palavra):
+        return (palavra[0], palavra[-1])
+
+    def cobol(self):
+        for k, v in enumerate(self.meta):
+            if v not in self.letras[k]:
+                return False
+        return True
+
+    def __str__(self):
+        if self.cobol():
+            return 'GRACE HOPPER'
+        else:
+            return 'BUG'
+
 class Jon():
     def __init__(self):
         self.string = input()
@@ -15,14 +36,6 @@ class Jon():
             return int(self.j) - int(self.r)
         elif self.l.isnumeric() and self.j.isnumeric():
             return int(self.j) - int(self.l)
-
-try:
-    while True:
-        obj = Jon()
-        print(obj.encontraX())
-except Exception as r:
-    pass
-
 
 class Evergreen():
     def __init__(self):
