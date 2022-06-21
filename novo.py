@@ -1,3 +1,48 @@
+class Cabo():
+    def __init__(self, casos):
+        self.casos = casos
+        self.nomes = [input() for i in range(casos)]
+        self.valores = [sum([ord(x) for x in i]) for i in self.nomes]
+        self.cont = 0
+
+    def times(self, x=0):
+        self.timeA = self.nomes[:x]
+        self.timeB = self.nomes[x:]
+        self.valoresA = self.valores[:x]
+        self.valoresA.reverse()
+        self.valoresB = self.valores[x:]
+        self.valoresA = sum((self.potencia(self.valoresA)))
+        self.valoresB = sum((self.potencia(self.valoresB)))
+
+    def potencia(self, lista):
+        if lista:
+            return [valor * (i + 1)  for i, valor in enumerate(lista)]
+        return []
+
+    def compara_igualdade(self):
+        self.times(self.cont)
+        if self.valoresA == self.valoresB:
+            print(f'{self.timeA[-1]}')
+            return
+        self.cont += 1
+        if self.cont > self.casos:
+            print("Impossibilidade de empate.")
+            return
+        self.compara_igualdade()
+
+
+while True:
+    c = int(input())
+    if c == 0:
+        break
+
+    obj = Cabo(c)
+    obj.compara_igualdade()
+
+
+
+
+
 class Jetiqui():
     def __init__(self):
         self.first = input()
