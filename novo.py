@@ -1,8 +1,35 @@
+class SenhaIFS():
+    def __init__(self):
+        self.entrada = input().replace(' ', '')
+        self.entrada = self.entrada[:12]
+
+        self.cript = {
+            0: 'GQaku',
+            1: 'ISblv',
+            2: 'EOYcmw',
+            3: 'FPZdnx',
+            4: 'JTeoy',
+            5: 'DNXfpz',
+            6: 'AKUgq',
+            7: 'CMWhr',
+            8: 'BLVis',
+            9: 'HRjt'
+        }
+
+    def criptografar(self):
+        saida = ''
+        for letra in self.entrada:
+            for key, value in self.cript.items():
+                if letra in value:
+                    saida += str(key)
+        return saida
+
 class Cabo():
     def __init__(self, casos):
         self.casos = casos
+        self.meio = int(casos / 2)
         self.nomes = [input() for i in range(casos)]
-        self.valores = [sum([ord(x) for x in i]) for i in self.nomes]
+        self.valores = [sum([ord(letra) for letra in nome]) for nome in self.nomes]
         self.cont = 0
 
     def times(self, x=0):
@@ -38,7 +65,6 @@ while True:
 
     obj = Cabo(c)
     obj.compara_igualdade()
-
 
 
 
