@@ -1,3 +1,36 @@
+class Ahmoc():
+    def __init__(self, c):
+        self.assinatura = str(c)
+        self.painel = input()
+
+    def quente(self):
+        if self.assinatura in self.painel:
+            return True
+        return False
+
+casos = []
+while True:
+    c = int(input())
+    if c == 0:
+        break
+
+    obj = Ahmoc(c)
+    saida = obj.quente()
+    casos.append(saida)
+
+nr_casos = len(casos)
+final = '\n\n'
+for instancia, item in enumerate(casos):
+    if instancia + 1 == nr_casos:
+        final = ''
+
+    print(f'Instancia {instancia + 1}')
+    if saida:
+        print('verdadeira', end=final)
+    else:
+        print('falsa', end=final)
+
+
 class SenhaIFS():
     def __init__(self):
         self.entrada = input().replace(' ', '')
@@ -33,13 +66,13 @@ class Cabo():
         self.cont = 0
 
     def times(self, x=0):
-        self.timeA = self.nomes[:x]
-        self.timeB = self.nomes[x:]
-        self.valoresA = self.valores[:x]
-        self.valoresA.reverse()
-        self.valoresB = self.valores[x:]
-        self.valoresA = sum((self.potencia(self.valoresA)))
-        self.valoresB = sum((self.potencia(self.valoresB)))
+        self.timeA = self.nomes[:self.meio]
+        self.timeB = self.nomes[self.meio:]
+        self.valoresA = self.valores[self.meio - 1::-1]
+        self.valoresB = self.valores[self.meio:]
+        self.somaValoresA = sum((self.potencia(self.valoresA)))
+        self.somaValoresB = sum((self.potencia(self.valoresB)))
+
 
     def potencia(self, lista):
         if lista:
@@ -47,17 +80,26 @@ class Cabo():
         return []
 
     def compara_igualdade(self):
-        self.times(self.cont)
-        if self.valoresA == self.valoresB:
+        self.times(self.meio)
+        if self.somaValoresA == self.somaValoresB:
             print(f'{self.timeA[-1]}')
             return
+
+        self.definte_ponto_corte()
         self.cont += 1
+
         if self.cont > self.casos:
             print("Impossibilidade de empate.")
             return
         self.compara_igualdade()
 
+    def definte_ponto_corte(self):
+        if self.somaValoresA > self.somaValoresB:
+            self.meio -= 1
+            return
+        self.meio += 1
 
+'''
 while True:
     c = int(input())
     if c == 0:
@@ -65,7 +107,7 @@ while True:
 
     obj = Cabo(c)
     obj.compara_igualdade()
-
+'''
 
 
 
