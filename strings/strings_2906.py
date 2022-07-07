@@ -1,8 +1,7 @@
 class Email():
     def __init__(self, casos):
         self.lista_emails = [input() for i in range(casos)]
-        # self.emails_unicos = set()
-    
+
     
     def encontra_arroba(self, email):
         return email.find('@')
