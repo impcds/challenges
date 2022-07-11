@@ -1,6 +1,3 @@
-import re
-
-
 class Emoticon():
     def __init__(self, emoticons, linhas):
         self.emoticons = [input() for i in range(emoticons)]
